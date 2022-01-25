@@ -26,12 +26,23 @@ class PageController extends Controller
 
     public function singleProperty($id)
     {
-        return view("pages.single-property");
+        $properties = Property::findOrFail($id);
+        return view("pages.property-detail")->with("properties",$properties);
     }
 
     public function contactUs()
     {
         return view("pages.contact-us");
+    }
+    public function team()
+    {
+        return view("pages.team");
+    }
+
+    public function allProperty()
+    {
+        $properties  = Property::all();
+        return view("pages.all-properties")->with("properties",$properties);;
     }
 }
 

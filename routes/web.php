@@ -20,21 +20,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PageController::class,'index']);
 Route::get('/about-us', [PageController::class,'aboutUs']);
 Route::get('/property', [PageController::class,'property']);
-Route::get('/property/{id}', [PageController::class,'SingleProperty']);
+Route::get('/property-detail/{id}', [PageController::class,'SingleProperty']);
 Route::get('/contact-us', [PageController::class,'contactUs']);
+Route::get('/team', [PageController::class,'team']);
+Route::get('/all-properties', [PageController::class,'allProperty']);
 
-Route::get('/property', [PropertyController::class,'index']);
-Route::get('/property/create', [PropertyController::class,'create']);
-Route::post('/post', [PropertyController::class,'store']);
-Route::delete('/property/delete/{id}', [PropertyController::class,'destroy']);
-Route::get('/property/edit/{id}', [PropertyController::class,'edit']);
-Route::delete('/property/deleteimage/{id}', [PropertyController::class,'deleteimage']);
-Route::delete('/property/deletecoverimage/{id}', [PropertyController::class,'deletecoverimage']);
-Route::put('/property/update/{id}', [PropertyController::class,'update']);
+Route::get('/property', [PropertyController::class,'index'])->middleware('auth');
+Route::get('/add-property', [PropertyController::class,'create'])->middleware('auth');
+Route::post('/post', [PropertyController::class,'store'])->middleware('auth');;
+Route::delete('/property/delete/{id}', [PropertyController::class,'destroy'])->middleware('auth');;
+Route::get('/property/edit/{id}', [PropertyController::class,'edit'])->middleware('auth');;
+Route::delete('/property/deleteimage/{id}', [PropertyController::class,'deleteimage'])->middleware('auth');;
+Route::delete('/property/deletecoverimage/{id}', [PropertyController::class,'deletecoverimage'])->middleware('auth');;
+Route::put('/property/update/{id}', [PropertyController::class,'update'])->middleware('auth');;
 
 
 Auth::routes();
-
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\PropertyController::class, 'index'])->name('home');
